@@ -38,11 +38,10 @@ def normalize_song(raw: Song) -> Song:
     genre = normalize_genre(str(raw.get("genre", "")))
     energy = raw.get("energy", 0)
 
-    if isinstance(energy, str):
-        try:
-            energy = int(energy)
-        except ValueError:
-            energy = 0
+    try:
+        energy = int(energy)
+    except (ValueError, TypeError):
+        energy = 0
 
     tags = raw.get("tags", [])
     if isinstance(tags, str):
